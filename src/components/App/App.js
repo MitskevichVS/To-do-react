@@ -6,20 +6,27 @@ import ClearInput from '../../logic/clearInput/clearInput';
 import List from '../list/list';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: [{ value: 'create To do app', done: false, id: 1 }],
+    };
+  }
+
   AddListItem = () => {
     const addInputValue = document.getElementById('addInput').value;
     this.setState((prevState) => ({
-      ListItems: [...prevState.ListItems, { title: addInputValue, done: false }],
+      todos: [...prevState.todos, { value: addInputValue, done: false }],
     }));
     ClearInput();
   }
 
   render() {
-    const { ListItems } = this.state;
+    const { todos } = this.state;
     return (
       <>
         <Header />
-        <List ListItems={ListItems} />
+        <List Items={todos} />
         <AddItem AddListItem={this.AddListItem} />
       </>
     );

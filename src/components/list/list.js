@@ -7,20 +7,31 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
+
+import './list.css';
 
 const uniqid = require('uniqid');
 
 class List extends React.Component {
+  click = (event) => {
+    let node = event.target;
+    while (!node.id) {
+      node = node.parentNode;
+    }
+    console.log(node.id);
+  }
+
   createListItem = (props) => (
     <>
-      {props.ListItems.map((item) => (
+      {props.map((item) => (
         <ListGroup.Item key={uniqid()}>
-          <Row>
+          <Row id={item.id}>
             <Col xs={8} md={8} lg={9}>
-              {item.title}
+              {item.value}
             </Col>
             <Col xs={1}>
-              <Button variant="light"><FontAwesomeIcon icon={faTrash} /></Button>
+              <Button variant="light" onClick={this.click}><FontAwesomeIcon icon={faTrash} /></Button>
             </Col>
             <Col xs={1}>
               <Button variant="light"><FontAwesomeIcon icon={faCheckCircle} /></Button>
@@ -32,12 +43,13 @@ class List extends React.Component {
   )
 
   render() {
+    const { Items } = this.props;
     return (
       <Container>
         <ListGroup>
           <Row>
             <Col md={{ span: 6, offset: 3 }}>
-              {this.createListItem(this.props)}
+              {this.createListItem(Items)}
             </Col>
           </Row>
         </ListGroup>
@@ -45,5 +57,9 @@ class List extends React.Component {
     );
   }
 }
+
+List.propTypes = {
+  Items: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default List;
