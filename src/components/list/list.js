@@ -14,12 +14,9 @@ import './list.css';
 const uniqid = require('uniqid');
 
 class List extends React.Component {
-  click = (event) => {
-    let node = event.target;
-    while (!node.id) {
-      node = node.parentNode;
-    }
-    console.log(node.id);
+  deleteItem = (event) => {
+    const { deleteListItem } = this.props;
+    deleteListItem(event);
   }
 
   createListItem = (props) => (
@@ -31,7 +28,7 @@ class List extends React.Component {
               {item.value}
             </Col>
             <Col xs={1}>
-              <Button variant="light" onClick={this.click}><FontAwesomeIcon icon={faTrash} /></Button>
+              <Button variant="light" onClick={this.deleteItem}><FontAwesomeIcon icon={faTrash} /></Button>
             </Col>
             <Col xs={1}>
               <Button variant="light"><FontAwesomeIcon icon={faCheckCircle} /></Button>
@@ -44,6 +41,7 @@ class List extends React.Component {
 
   render() {
     const { Items } = this.props;
+    console.log(Items);
     return (
       <Container>
         <ListGroup>
