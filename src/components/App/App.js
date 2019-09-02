@@ -23,7 +23,7 @@ class App extends React.Component {
     const { id } = node;
     const { todos } = this.state;
     this.setState({
-      todos: todos.filter((item) => item.id !== id),
+      todos: todos.filter((item) => item.id !== +id),
     });
   }
 

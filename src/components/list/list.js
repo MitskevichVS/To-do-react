@@ -57,6 +57,7 @@ class List extends React.Component {
 }
 
 List.propTypes = {
+  deleteListItem: PropTypes.func.isRequired,
   Items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
