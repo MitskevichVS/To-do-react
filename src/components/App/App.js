@@ -15,6 +15,24 @@ class App extends React.Component {
     };
   }
 
+  toggleListItem = (event) => {
+    let node = event.target;
+    while (!node.id) {
+      node = node.parentNode;
+    }
+    const { id } = node;
+    const { todos } = this.state;
+    this.setState({
+      todos: todos.map((item) => {
+        if (item.id === +id) {
+          // eslint-disable-next-line no-param-reassign
+          item.done = !item.done;
+          return item;
+        } return item;
+      }),
+    });
+  }
+
   deleteListItem = (event) => {
     let node = event.target;
     while (!node.id) {
@@ -41,7 +59,11 @@ class App extends React.Component {
     return (
       <>
         <Header />
-        <List Items={todos} deleteListItem={this.deleteListItem} />
+        <List
+          Items={todos}
+          deleteListItem={this.deleteListItem}
+          toggleListItem={this.toggleListItem}
+        />
         <AddItem AddListItem={this.AddListItem} />
       </>
     );

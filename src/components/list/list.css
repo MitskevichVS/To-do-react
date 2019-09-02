@@ -1,3 +1,7 @@
 div .list-group {
   margin: 3% 0;
 }
+
+.toggle {
+  text-decoration: line-through;
+}

@@ -19,19 +19,24 @@ class List extends React.Component {
     deleteListItem(event);
   }
 
+  toggleItem = (event) => {
+    const { toggleListItem } = this.props;
+    toggleListItem(event);
+  }
+
   createListItem = (props) => (
     <>
       {props.map((item) => (
         <ListGroup.Item key={uniqid()}>
           <Row id={item.id}>
-            <Col xs={8} md={8} lg={9}>
+            <Col xs={8} md={8} lg={9} className={`${item.done === true ? 'toggle' : ''}`}>
               {item.value}
             </Col>
             <Col xs={1}>
               <Button variant="light" onClick={this.deleteItem}><FontAwesomeIcon icon={faTrash} /></Button>
             </Col>
             <Col xs={1}>
-              <Button variant="light"><FontAwesomeIcon icon={faCheckCircle} /></Button>
+              <Button variant="light" onClick={this.toggleItem}><FontAwesomeIcon icon={faCheckCircle} /></Button>
             </Col>
           </Row>
         </ListGroup.Item>
