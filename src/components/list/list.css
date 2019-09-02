@@ -2,6 +2,18 @@ div .list-group {
   margin: 3% 0;
 }
 
+.row .list-group-item {
+  padding: 0 0;
+}
+
+.row .col-lg-9 {
+  padding: 10px 30px;
+}
+
+.button {
+  margin: 5px 5px;
+}
+
 .toggle {
   text-decoration: line-through;
 }

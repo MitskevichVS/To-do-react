@@ -33,10 +33,10 @@ class List extends React.Component {
               {item.value}
             </Col>
             <Col xs={1}>
-              <Button variant="light" onClick={this.deleteItem}><FontAwesomeIcon icon={faTrash} /></Button>
+              <Button variant="light" onClick={this.deleteItem} className="button"><FontAwesomeIcon icon={faTrash} /></Button>
             </Col>
             <Col xs={1}>
-              <Button variant="light" onClick={this.toggleItem}><FontAwesomeIcon icon={faCheckCircle} /></Button>
+              <Button variant="light" onClick={this.toggleItem} className="button"><FontAwesomeIcon icon={faCheckCircle} /></Button>
             </Col>
           </Row>
         </ListGroup.Item>
@@ -46,7 +46,6 @@ class List extends React.Component {
 
   render() {
     const { Items } = this.props;
-    console.log(Items);
     return (
       <Container>
         <ListGroup>
