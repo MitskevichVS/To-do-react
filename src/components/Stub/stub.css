@@ -1,0 +1,22 @@
+div .alertContainer {
+  margin: 2% auto;
+  width: 40%;
+}
+
+@media screen and (max-width: 768px) {
+  div .alertContainer {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  div .alertContainer {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  div .alertContainer {
+    width: 100%;
+  }
+}

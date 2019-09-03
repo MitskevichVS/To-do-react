@@ -4,6 +4,7 @@ import Header from '../header/header';
 import AddItem from '../addItem/addItem';
 import ClearInput from '../../logic/clearInput/clearInput';
 import List from '../list/list';
+import Stub from '../Stub/stub';
 
 let ListItemId = 1;
 
@@ -59,11 +60,14 @@ class App extends React.Component {
     return (
       <>
         <Header />
-        <List
-          Items={todos}
-          deleteListItem={this.deleteListItem}
-          toggleListItem={this.toggleListItem}
-        />
+        { todos.length === 0 ? <Stub />
+          : (
+            <List
+              Items={todos}
+              deleteListItem={this.deleteListItem}
+              toggleListItem={this.toggleListItem}
+            />
+          )}
         <AddItem AddListItem={this.AddListItem} />
       </>
     );
