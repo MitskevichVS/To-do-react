@@ -29,13 +29,13 @@ class List extends React.Component {
       {props.map((item) => (
         <ListGroup.Item key={uniqid()}>
           <Row id={item.id}>
-            <Col xs={8} md={8} lg={9} className={`${item.done === true ? 'toggle' : ''}`}>
+            <Col xs={7} md={7} lg={9} className={`${item.done === true ? 'toggle' : ''}`}>
               {item.value}
             </Col>
-            <Col xs={1}>
+            <Col xs={2} md={2} lg={1}>
               <Button variant="light" onClick={this.deleteItem} className="button"><FontAwesomeIcon icon={faTrash} /></Button>
             </Col>
-            <Col xs={1}>
+            <Col xs={2} md={2} lg={1}>
               <Button variant="light" onClick={this.toggleItem} className="button"><FontAwesomeIcon icon={faCheckCircle} /></Button>
             </Col>
           </Row>
@@ -61,6 +61,7 @@ class List extends React.Component {
 }
 
 List.propTypes = {
+  toggleListItem: PropTypes.func.isRequired,
   deleteListItem: PropTypes.func.isRequired,
   Items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
