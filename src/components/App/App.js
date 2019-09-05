@@ -5,6 +5,7 @@ import AddItem from '../addItem/addItem';
 import ClearInput from '../../logic/clearInput/clearInput';
 import List from '../list/list';
 import Stub from '../Stub/stub';
+import SearchPanel from '../search/search';
 
 let ListItemId = 1;
 
@@ -13,7 +14,20 @@ class App extends React.Component {
     super(props);
     this.state = {
       todos: [{ value: 'create To do app', done: false, id: 1 }],
+      searchText: '',
     };
+  }
+
+  setSearchText = (text) => {
+    this.setState({ searchText: text });
+  }
+
+  findItems = (items, text) => {
+    if (text.length === 0) {
+      return items;
+    }
+
+    return items.filter((item) => item.value.indexOf(text) !== -1);
   }
 
   toggleListItem = (event) => {
@@ -56,14 +70,17 @@ class App extends React.Component {
   }
 
   render() {
-    const { todos } = this.state;
+    const { todos, searchText } = this.state;
+
+    const searcheItems = this.findItems(todos, searchText);
     return (
       <>
         <Header />
+        <SearchPanel getSearchText={this.setSearchText} />
         { todos.length === 0 ? <Stub />
           : (
             <List
-              Items={todos}
+              Items={searcheItems}
               deleteListItem={this.deleteListItem}
               toggleListItem={this.toggleListItem}
             />
