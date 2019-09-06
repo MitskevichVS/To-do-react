@@ -1,6 +1,7 @@
 import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Container from 'react-bootstrap/Container';
@@ -13,6 +14,7 @@ class SearchPanel extends React.Component {
     super(props);
     this.state = {
       text: '',
+      filterTerm: 'All',
     };
   }
 
@@ -23,8 +25,14 @@ class SearchPanel extends React.Component {
     getSearchText(receivedText);
   }
 
+  filterItems = (event) => {
+    const { setFilterTerm } = this.props;
+    this.setState({ filterTerm: event });
+    setFilterTerm(event);
+  }
+
   render() {
-    const { text } = this.state;
+    const { text, filterTerm } = this.state;
     return (
       <Container>
         <InputGroup className="searchGroup">
@@ -33,11 +41,13 @@ class SearchPanel extends React.Component {
             onChange={this.searchItems}
             value={text}
           />
-          <ToggleButtonGroup type="radio" name="options" defaultValue="All">
-            <ToggleButton variant="outline-secondary" value="All">All</ToggleButton>
-            <ToggleButton variant="outline-secondary" value="Complete">Complete</ToggleButton>
-            <ToggleButton variant="outline-secondary" value="Incomplete">Incomplete</ToggleButton>
-          </ToggleButtonGroup>
+          <ButtonToolbar>
+            <ToggleButtonGroup name="filter" type="radio" onChange={this.filterItems} value={filterTerm}>
+              <ToggleButton value="All" variant="outline-secondary">All</ToggleButton>
+              <ToggleButton value="Active" variant="outline-secondary">Active</ToggleButton>
+              <ToggleButton value="Done" variant="outline-secondary">Done</ToggleButton>
+            </ToggleButtonGroup>
+          </ButtonToolbar>
         </InputGroup>
       </Container>
     );
@@ -46,6 +56,7 @@ class SearchPanel extends React.Component {
 
 SearchPanel.propTypes = {
   getSearchText: PropTypes.func.isRequired,
+  setFilterTerm: PropTypes.func.isRequired,
 };
 
 export default SearchPanel;

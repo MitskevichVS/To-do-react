@@ -15,7 +15,25 @@ class App extends React.Component {
     this.state = {
       todos: [{ value: 'create To do app', done: false, id: 1 }],
       searchText: '',
+      filter: '',
     };
+  }
+
+  setFilterTerm = (filterTerm) => {
+    this.setState({ filter: filterTerm });
+  }
+
+  filterItems = (items, term) => {
+    switch (term) {
+      case 'All':
+        return items;
+      case 'Active':
+        return items.filter((item) => item.done === false);
+      case 'Done':
+        return items.filter((item) => item.done === true);
+      default:
+        return items;
+    }
   }
 
   setSearchText = (text) => {
@@ -71,13 +89,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { todos, searchText } = this.state;
+    const { todos, searchText, filter } = this.state;
 
-    const searcheItems = this.findItems(todos, searchText);
+    const searcheItems = this.filterItems(this.findItems(todos, searchText), filter);
     return (
       <>
         <Header />
-        <SearchPanel getSearchText={this.setSearchText} />
+        <SearchPanel getSearchText={this.setSearchText} setFilterTerm={this.setFilterTerm} />
         { todos.length === 0 ? <Stub />
           : (
             <List
