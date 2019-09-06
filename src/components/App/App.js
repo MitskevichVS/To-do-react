@@ -27,7 +27,7 @@ class App extends React.Component {
       return items;
     }
 
-    return items.filter((item) => item.value.indexOf(text) !== -1);
+    return items.filter((item) => item.value.toLowerCase().indexOf(text.toLowerCase()) !== -1);
   }
 
   toggleListItem = (event) => {
