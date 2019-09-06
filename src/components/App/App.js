@@ -63,6 +63,7 @@ class App extends React.Component {
   AddListItem = () => {
     ListItemId += 1;
     const addInputValue = document.getElementById('addInput').value;
+    if (addInputValue === '') return;
     this.setState((prevState) => ({
       todos: [...prevState.todos, { value: addInputValue, done: false, id: ListItemId }],
     }));
